@@ -1,0 +1,5 @@
+package me.dio.bootcamp_santander_2024.service;
+
+public interface UserService {
+
+}
