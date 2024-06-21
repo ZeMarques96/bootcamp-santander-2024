@@ -8,4 +8,5 @@ import me.dio.bootcamp_santander_2024.domain.model.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long>{
 
+    boolean existsByAccountNumber(String account);
 }

@@ -1,6 +1,7 @@
 package me.dio.bootcamp_santander_2024.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.NoSuchElementException;
+
 import org.springframework.stereotype.Service;
 
 import me.dio.bootcamp_santander_2024.domain.model.User;
@@ -10,23 +11,24 @@ import me.dio.bootcamp_santander_2024.service.UserService;
 @Service
 public class UserServiceImpl implements UserService{
 
-    @Autowired
+    
     private final UserRepository userRepository;
 
-    public UserRepositoryImpl(UserRepository userRepository){
+    public UserServiceImpl(UserRepository userRepository){
         this.userRepository = userRepository;
     }
 
     @Override
     public User findById(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findById'");
+        return userRepository.findById(id).orElseThrow(NoSuchElementException::new);
     }
 
     @Override
     public User create(User userToCreate) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'create'");
+        if (userRepository.existsByAccountNumber(userToCreate.getAccount().getNumber())){
+            throw new IllegalArgumentException("This Account number already exists.");
+        }
+        return userRepository.save(userToCreate);
     }
 
 }
