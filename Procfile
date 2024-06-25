@@ -1,0 +1,1 @@
+web:java -jar target/bootcamp-santander-2024-0.0.1-SNAPSHOT.jar
